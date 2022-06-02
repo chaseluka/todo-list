@@ -16,7 +16,6 @@ const newTodo = () => {
 
 const getSelectedRadioBtn = () => {
     const priorityList = document.getElementsByName('priority');
-
     for(i = 0; i < priorityList.length; i++){
         if (priorityList[i].checked){
             return priorityList[i].value
