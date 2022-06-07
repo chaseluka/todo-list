@@ -49,24 +49,57 @@ body {
 
 .task-list {
     margin: 2% 8% 0px 1%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
 }
 
 .row {
     display: flex;
     justify-content: space-between;
-    height: 5vh;
-    margin-bottom: 1vh;
-    width: min(50vw, 500px);
+    height: fit-content;
+    width: min(50vw, 800px);
+    border-bottom: solid 1px #555;
+    gap: 5px;
+    padding-bottom: 0.5vmax;
 }
 
 .row-left, .row-right {
     display: flex;
     align-items: center;
+    justify-self: center;
     gap: 0.6vw;
 }
 
-.task, #add-task div {
-    font-size: 1vmax;
+.task, #add-task div, input[name="title"], .priority {
+    font-size: 1.1vmax;
+}
+
+.task-title {
+    display: flex;
+    flex-direction: column;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.task-notes, .task-date, input[name="notes"], input[name="due-date"], select {
+    font-size: 0.9vmax;
+    color: #555;
+}
+
+.priority {
+    color: #555;
+}
+
+.task-notes, input[name="due-date"] {
+    font-size: 0.8vmax;
+}
+
+.row > div > img {
+    height: 1vmax;
 }
 
 #add-task {
@@ -105,6 +138,22 @@ body {
     
 }
 
-.projects-list li {
-    
+form .row-left, form .task, input{
+    width: 100%;
 }
+
+.input-container input, select {
+    background-color: #ddd;
+    border: none;
+    appearance: none;
+}
+
+input:focus, select {
+    outline-width: 0;
+}
+
+.priority {
+    display: flex;
+    gap: 5px;
+}
+
