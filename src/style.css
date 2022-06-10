@@ -72,7 +72,7 @@ body {
     gap: 0.6vw;
 }
 
-.task, #add-task div, input[name="title"], .priority {
+.task, #new-task div, input[name="title"] {
     font-size: 1.1vmax;
 }
 
@@ -85,29 +85,58 @@ body {
     overflow: hidden;
 }
 
-.task-notes, .task-date, input[name="notes"], input[name="due-date"], select {
+.task-title-container {
+    display: flex;
+    align-items: center;
+    gap: 0.4vw;
+}
+
+.low {
+    color: #ffa701;
+}
+
+.medium {
+    color: #ff4500;
+}
+
+.high {
+    color: #e60000;
+}
+
+.task-notes, .task-date, input[name="notes"], input[name="date"], select {
     font-size: 0.9vmax;
     color: #555;
 }
 
 .priority {
     color: #555;
+    font-size: 1vmax;
 }
 
-.task-notes, input[name="due-date"] {
+.task-notes, input[name="date"] {
     font-size: 0.8vmax;
+}
+
+#date {
+    width: fit-content;
+}
+
+.task-title div:last-child {
+    display: flex;
 }
 
 .row > div > img {
     height: 1vmax;
 }
 
-#add-task {
+#new-task {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     margin: 5vh 0px 0px 1%;
     gap: 7px;
+    width: fit-content;
+    cursor: pointer;
 }
 
 .sidebar-container {
@@ -157,3 +186,25 @@ input:focus, select {
     gap: 5px;
 }
 
+
+#add-task-button, #cancel-add-task {
+    width: 4vw;
+    height: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+#add-task-button {
+    background-color: #00ab66;
+}
+
+#cancel-add-task {
+    background-color: #cf142b;
+}
+
+#add-task-button img, #cancel-add-task img {
+    height: 1vmax;
+}
