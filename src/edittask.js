@@ -4,7 +4,6 @@ import { makeTask } from './maketask.js';
 
 const editTask = (e) => {
     const row = e.target.parentElement.parentElement;
-    console.log(row.getAttribute('data-task'));
     const taskList = document.querySelector('.task-list');
     taskList.removeChild(row);
 
@@ -17,15 +16,16 @@ const editTask = (e) => {
             }
             else return task.title === row.getAttribute('data-task');
         });
-        
         return { taskInfo }
     }
 
     inputTaskDOMDisplay.title.value = getTaskInfo().taskInfo[0].title;
     inputTaskDOMDisplay.notes.value = getTaskInfo().taskInfo[0].notes;
     inputTaskDOMDisplay.date.value = getTaskInfo().taskInfo[0].date;
+    
+    makeTask.deleteTaskfromLibrary(getTaskInfo().taskInfo[0]);
 
-    displayTask().deleteTaskfromLibrary(taskInfo.dup)
+    makeTask
 }
 
 export { editTask }

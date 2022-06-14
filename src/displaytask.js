@@ -2,41 +2,14 @@ import { makeTask } from './maketask.js';
 import { inputTaskDOMDisplay } from './addtodo.js';
 import { editTask } from './edittask.js';
 
-
 const displayTask = (task) => {
-    const prohibitDuplicateTitles = (thisTask) => {
-        let duplicateTitles = makeTask.taskLibrary.tasks.filter(obj => {
-            if (obj.duplicateTitle !== ''){
-                return obj.duplicateTitle === thisTask.duplicateTitle
-            }
-            else return obj.title === thisTask.title;
-        });
-        if (duplicateTitles.length > 1){
-            thisTask.duplicateTitle = Math.random()*100;
-            let duplicated = thisTask;
-            prohibitDuplicateTitles(duplicated);
-        }
-        console.log(makeTask.taskLibrary.tasks);
-        return { duplicateTitles, thisTask}
-    }
-
     const addDataTitle = (row) => {
-        if (prohibitDuplicateTitles(task).thisTask.duplicateTitle !== ''){
-            return row.setAttribute('data-task', `${task.title}${prohibitDuplicateTitles(task).thisTask.duplicateTitle}`);
+        if (makeTask.prohibitDuplicateTitles(task).thisTask.duplicateTitle !== ''){
+            return row.setAttribute('data-task', `${task.duplicateTitle}`);
         }
         else {
             return row.setAttribute('data-task', `${task.title}`);
         }
-    }
-
-    const deleteTaskfromLibrary = (deleteThis) => {
-        makeTask.taskLibrary.tasks = makeTask.taskLibrary.tasks.filter(obj => {
-            if (obj.duplicateTitle !== ''){
-                return obj.duplicateTitle !== deleteThis
-            }
-            else return obj.title !== deleteThis
-        });
-        console.log(makeTask.taskLibrary.tasks);
     }
 
     if (task.title !== ''){
@@ -123,13 +96,12 @@ const displayTask = (task) => {
             const deleteTask = e.target.parentElement.parentElement;
             taskList.removeChild(deleteTask);
 
-            deleteTaskfromLibrary(deleteTask.getAttribute('data-task'));
+            makeTask.deleteTaskfromLibrary(deleteTask.getAttribute('data-task'));
         });
 
         edit.addEventListener('click', (e) => editTask(e))
-        return { deleteTaskfromLibrary }
     }
-    return { deleteTaskfromLibrary }
+    
 }
 
 export { displayTask }
