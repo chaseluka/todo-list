@@ -1,8 +1,8 @@
 import { displayTask } from './displaytask.js';
 
 const makeTask = (() => {
-    const createTask = (title, notes, date, priority) => {
-        return {title, notes, date, priority}
+    const createTask = (title, notes, date, priority, duplicateTitle) => {
+        return {title, notes, date, priority, duplicateTitle}
     }
 
     const newTask = () => {
@@ -10,10 +10,11 @@ const makeTask = (() => {
             document.getElementById('title').value,
             document.getElementById('notes').value,
             document.getElementById('date').value,
-            document.getElementById('priority-list').value
+            document.getElementById('priority-list').value,
+            '',
         );
         taskLibrary.tasks.push(task);
-        displayTask(task)
+        displayTask(task);
         return {task}
     } 
 

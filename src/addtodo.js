@@ -1,5 +1,5 @@
 import { makeTask } from './maketask.js';
-import { displayTask } from './displaytask.js';
+
 
 const inputTaskDOMDisplay = (() => {
     const taskList = document.querySelector('.task-list');
@@ -80,7 +80,7 @@ const inputTaskDOMDisplay = (() => {
     cancelTaskImg.src = '../src/images/delete.svg';
 
     const appendTask = () => {
-        removeTask();
+        removeInputTask();
         
         taskList.appendChild(row);
 
@@ -130,7 +130,9 @@ const inputTaskDOMDisplay = (() => {
 
     addTaskButton.addEventListener('click', (e) => {
         e.preventDefault();
-        makeTask.newTask();
+        if (title.value !== ''){
+            makeTask.newTask();
+        }
         removeInputTask();
     });
     
@@ -140,7 +142,7 @@ const inputTaskDOMDisplay = (() => {
     });
 
     
-    return { removeInputTask, appendTask}
+    return { removeInputTask, appendTask, date, notes, title, priorityTitle}
 })();
 
 export { inputTaskDOMDisplay }

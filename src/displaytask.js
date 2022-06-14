@@ -1,27 +1,44 @@
 import { makeTask } from './maketask.js';
 import { inputTaskDOMDisplay } from './addtodo.js';
+import { editTask } from './edittask.js';
 
 
 const displayTask = (task) => {
-    const prohibitDuplicateTitles = () => {
+    const prohibitDuplicateTitles = (thisTask) => {
         let duplicateTitles = makeTask.taskLibrary.tasks.filter(obj => {
-            return obj.title === task.title;
+            if (obj.duplicateTitle !== ''){
+                return obj.duplicateTitle === thisTask.duplicateTitle
+            }
+            else return obj.title === thisTask.title;
         });
-        let duplicateTitlesExist = false;
         if (duplicateTitles.length > 1){
-            duplicateTitlesExist = true;
+            thisTask.duplicateTitle = Math.random()*100;
+            let duplicated = thisTask;
+            prohibitDuplicateTitles(duplicated);
         }
-        return { duplicateTitles, duplicateTitlesExist}
+        console.log(makeTask.taskLibrary.tasks);
+        return { duplicateTitles, thisTask}
     }
 
     const addDataTitle = (row) => {
-        if (prohibitDuplicateTitles().duplicateTitlesExist === true){
-            row.setAttribute('data-task', `${task.title} ${prohibitDuplicateTitles().duplicateTitles.length}`);
+        if (prohibitDuplicateTitles(task).thisTask.duplicateTitle !== ''){
+            return row.setAttribute('data-task', `${task.title}${prohibitDuplicateTitles(task).thisTask.duplicateTitle}`);
         }
         else {
-            row.setAttribute('data-task', `${task.title}`);
+            return row.setAttribute('data-task', `${task.title}`);
         }
     }
+
+    const deleteTaskfromLibrary = (deleteThis) => {
+        makeTask.taskLibrary.tasks = makeTask.taskLibrary.tasks.filter(obj => {
+            if (obj.duplicateTitle !== ''){
+                return obj.duplicateTitle !== deleteThis
+            }
+            else return obj.title !== deleteThis
+        });
+        console.log(makeTask.taskLibrary.tasks);
+    }
+
     if (task.title !== ''){
         const taskList = document.querySelector('.task-list');
 
@@ -50,7 +67,6 @@ const displayTask = (task) => {
 
         const title = document.createElement('div');
         title.textContent = task.title;
-        console.log('hi');
         title.classList.add('task-title');
 
         if (task.priority !== 'none'){
@@ -87,7 +103,6 @@ const displayTask = (task) => {
             notes.classList.add('task-notes');
             taskContainer.appendChild(notes);
         }
-        console.log(task.date);
         if (task.date !== ''){
             const date = document.createElement('div');
             date.textContent = task.date;
@@ -104,21 +119,17 @@ const displayTask = (task) => {
         rowRight.appendChild(edit);
         rowRight.appendChild(deleteImg);
 
-        const deleteTaskfromLibrary = (deleteThis) => {
-            makeTask.taskLibrary.tasks = makeTask.taskLibrary.tasks.filter(obj => {
-                return obj.title !== deleteThis
-            })
-        }
-
         deleteImg.addEventListener('click', (e) => {
             const deleteTask = e.target.parentElement.parentElement;
             taskList.removeChild(deleteTask);
 
             deleteTaskfromLibrary(deleteTask.getAttribute('data-task'));
-            console.log(makeTask.taskLibrary.tasks);
-        })
+        });
+
+        edit.addEventListener('click', (e) => editTask(e))
+        return { deleteTaskfromLibrary }
     }
-    else return
+    return { deleteTaskfromLibrary }
 }
 
 export { displayTask }
