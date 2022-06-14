@@ -38,13 +38,6 @@ const makeTask = (() => {
 
     const deleteTaskfromLibrary = (deleteThis) => {
         taskLibrary.tasks = taskLibrary.tasks.filter(obj => {
-            if (typeof deleteThis === 'object' && obj.duplicateTitle === ''){
-                deleteThis = deleteThis.title;
-            }
-            else if (typeof deleteThis === 'object' && obj.duplicateTitle !== ''){
-                deleteThis = deleteThis.duplicateTitle;
-            }
-            console.log(deleteThis);
             if (obj.duplicateTitle !== ''){
                 return obj.duplicateTitle !== deleteThis
             }

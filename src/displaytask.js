@@ -1,6 +1,6 @@
 import { makeTask } from './maketask.js';
-import { inputTaskDOMDisplay } from './addtodo.js';
 import { editTask } from './edittask.js';
+import { completeTask } from './completetask.js';
 
 const displayTask = (task) => {
     const addDataTitle = (row) => {
@@ -28,10 +28,10 @@ const displayTask = (task) => {
         row.appendChild(rowLeft);
         row.appendChild(rowRight);
 
-        const blankCircle = document.createElement('img');
-        blankCircle.src = '../src/images/blank-circle.svg';
+        const circle = document.createElement('img');
+        circle.src = '../src/images/blank-circle.svg';
 
-        rowLeft.appendChild(blankCircle);
+        rowLeft.appendChild(circle);
 
         const taskContainer = document.createElement('div');
         taskContainer.classList.add('task');
@@ -99,7 +99,9 @@ const displayTask = (task) => {
             makeTask.deleteTaskfromLibrary(deleteTask.getAttribute('data-task'));
         });
 
-        edit.addEventListener('click', (e) => editTask(e))
+        edit.addEventListener('click', (e) => editTask(e));
+
+        circle.addEventListener('click',  (e) => completeTask(e));
     }
     
 }

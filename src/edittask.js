@@ -22,10 +22,9 @@ const editTask = (e) => {
     inputTaskDOMDisplay.title.value = getTaskInfo().taskInfo[0].title;
     inputTaskDOMDisplay.notes.value = getTaskInfo().taskInfo[0].notes;
     inputTaskDOMDisplay.date.value = getTaskInfo().taskInfo[0].date;
-    
-    makeTask.deleteTaskfromLibrary(getTaskInfo().taskInfo[0]);
 
-    makeTask
+    makeTask.deleteTaskfromLibrary(row.getAttribute('data-task'));
+
 }
 
 export { editTask }
