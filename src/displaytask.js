@@ -12,7 +12,7 @@ const displayTask = (task) => {
         }
     }
 
-    if (task.title !== ''){
+    if (task.title !== '' && task !== task[0]){
         const taskList = document.querySelector('.task-list');
 
         const row = document.createElement('div');

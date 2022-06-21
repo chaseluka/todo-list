@@ -272,10 +272,36 @@ input:focus, select {
     animation: fadeout 3s;
 }
 
+.project {
+    display: flex;
+    gap: 1vmax;
+    align-items: center;
+    width: 90%;
+}
 
-li span {
-    position: relative;
-    left: -10px;
+.project-right img {
+    height: 1.2vmax;
+}
+
+.project-left img  {
+    height: 1.4vmax;
+}
+
+.project > div > img, #new-project img  {
+    filter: invert(99%) sepia(4%) saturate(1529%) hue-rotate(227deg) brightness(116%) contrast(84%);
+}
+
+.project-left, .project-right {
+    display: flex;
+    align-items: center;
+}
+
+.project-left {
+    gap: 0.3vmax;
+}
+
+.project-title {
+    min-width: fit-content;
 }
 
 @keyframes fadeout {
