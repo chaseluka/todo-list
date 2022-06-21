@@ -1,4 +1,4 @@
-import { displayTask } from './displaytask.js';
+
 import { inputTaskDOMDisplay } from './addtodo.js';
 import { makeTask } from './maketask.js';
 

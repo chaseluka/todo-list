@@ -129,14 +129,26 @@ body {
     height: 1vmax;
 }
 
-#new-task {
+#new-task, #new-project {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 5vh 0px 0px 1%;
     gap: 7px;
     width: fit-content;
     cursor: pointer;
+}
+
+#new-project {
+    margin: 6% 0px 0px 2%;
+    font-size: 1.5vmax;
+}
+
+#new-project img, #new-task img {
+    height: 1.3vmax;
+}
+
+#new-task {
+    margin: 5vh 0px 0px 1%;
 }
 
 .sidebar-container {
@@ -165,6 +177,49 @@ body {
     font-size: 1.5vmax;
     margin: 2% 0px 0px 4%;
     
+}
+
+.input-project {
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2%;
+    height: 2.5vmax;
+}
+
+.input-project-right {
+    display: flex;
+    gap: 3px;
+    align-items: flex-end;
+}
+
+#add-project-button, #cancel-add-project {
+    height: 1.5vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    cursor: pointer;
+    width: 1.5vmax;
+}
+
+.input-project .input-container {
+    width: 14vw;
+    display: flex;
+    align-items: center;
+}
+
+
+#add-project-button img , #cancel-add-project img {
+    height: 0.7vmax;
+}
+
+
+#project {
+    border-radius: 5px;
+    padding: 2% 2% 2% 4%;
+    height: 3vh;
 }
 
 form .row-left, form .task, input{
@@ -197,11 +252,11 @@ input:focus, select {
     cursor: pointer;
 }
 
-#add-task-button {
+#add-task-button, #add-project-button {
     background-color: #00ab66;
 }
 
-#cancel-add-task {
+#cancel-add-task, #cancel-add-project {
     background-color: #cf142b;
 }
 
@@ -215,6 +270,12 @@ input:focus, select {
     -ms-animation: fadeout 3s;
     -o-animation: fadeout 3s;
     animation: fadeout 3s;
+}
+
+
+li span {
+    position: relative;
+    left: -10px;
 }
 
 @keyframes fadeout {
