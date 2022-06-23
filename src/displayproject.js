@@ -3,15 +3,15 @@ import { Projects } from './projects.js';
 
 const displayProject = (project) => {
     const addDataProject = (newProject) => {
-        if (Projects.prohibitDuplicateProjects(project).thisProject.duplicateTitle !== ''){
-            return newProject.setAttribute('data-project', `${project.duplicateTitle}`);
+        if (Projects.prohibitDuplicateProjects(project).thisProject.duplicateProjectTitle !== ''){
+            return newProject.setAttribute('data-project', `${project.duplicateProjectTitle}`);
         }
         else {
-            return newProject.setAttribute('data-project', `${project.title}`);
+            return newProject.setAttribute('data-project', `${project.projectTitle}`);
         }
     }
 
-    if (project.title !== ''){
+    if (project.projectTitle !== ''){
         const projectsList = document.querySelector('.projects-list');
 
         const projectDiv = document.createElement('div');
@@ -34,7 +34,7 @@ const displayProject = (project) => {
 
         const projectTitle = document.createElement('div');
         projectTitle.classList.add('project-title');
-        projectTitle.textContent = project.title;
+        projectTitle.textContent = project.projectTitle;
 
         projectLeft.appendChild(list);
         projectLeft.appendChild(projectTitle);
@@ -53,6 +53,7 @@ const displayProject = (project) => {
 
         projectLeft.addEventListener('click', () => {
             Projects.setSelectedProject(project);
+            console.log(Projects.determineSelectedProject());
         })
         
     }

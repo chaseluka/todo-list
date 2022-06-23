@@ -1,6 +1,7 @@
 
 import { inputTaskDOMDisplay } from './addtodo.js';
 import { makeTask } from './maketask.js';
+import { Projects } from './projects.js';
 
 const editTask = (e) => {
     const row = e.target.parentElement.parentElement;
@@ -10,7 +11,7 @@ const editTask = (e) => {
     inputTaskDOMDisplay.appendTask();
 
     const getTaskInfo = () => {
-        let taskInfo = makeTask.taskLibrary.tasks.filter(task => {
+        let taskInfo = Projects.determineSelectedProject().filter(task => {
             if (task.duplicateTitle !== ''){
                 return task.duplicateTitle === row.getAttribute('data-task');
             }
@@ -23,7 +24,7 @@ const editTask = (e) => {
     inputTaskDOMDisplay.notes.value = getTaskInfo().taskInfo[0].notes;
     inputTaskDOMDisplay.date.value = getTaskInfo().taskInfo[0].date;
 
-    makeTask.deleteTaskfromLibrary(row.getAttribute('data-task'));
+    Projects.deleteTaskfromLibrary(row.getAttribute('data-task'));
 
 }
 

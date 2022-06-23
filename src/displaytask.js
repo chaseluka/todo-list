@@ -1,6 +1,7 @@
 import { makeTask } from './maketask.js';
 import { editTask } from './edittask.js';
 import { completeTask } from './completetask.js';
+import { Projects } from './projects.js';
 
 const displayTask = (task) => {
     const addDataTitle = (row) => {
@@ -11,8 +12,7 @@ const displayTask = (task) => {
             return row.setAttribute('data-task', `${task.title}`);
         }
     }
-
-    if (task.title !== '' && task !== task[0]){
+    if (task.title !== '' && task.projectTitle === undefined){
         const taskList = document.querySelector('.task-list');
 
         const row = document.createElement('div');
@@ -96,7 +96,7 @@ const displayTask = (task) => {
             const deleteTask = e.target.parentElement.parentElement;
             taskList.removeChild(deleteTask);
 
-            makeTask.deleteTaskfromLibrary(deleteTask.getAttribute('data-task'));
+            Projects.deleteTaskfromLibrary(deleteTask.getAttribute('data-task'));
         });
 
         edit.addEventListener('click', (e) => editTask(e));

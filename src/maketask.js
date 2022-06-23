@@ -1,4 +1,5 @@
 import { displayTask } from './displaytask.js';
+import { Projects } from './projects.js';
 
 const makeTask = (() => {
     const createTask = (title, notes, date, priority, duplicateTitle) => {
@@ -13,13 +14,14 @@ const makeTask = (() => {
             document.getElementById('priority-list').value,
             '',
         );
-        taskLibrary.tasks.push(task);
+        Projects.determineSelectedProject().push(task);
+        console.log(Projects.projectsArray.projectsList);
         displayTask(task);
         return {task}
     } 
 
     const prohibitDuplicateTitles = (thisTask) => {
-        let duplicateTitles = makeTask.taskLibrary.tasks.filter(obj => {
+        let duplicateTitles = Projects.determineSelectedProject().filter(obj => {
             if (obj.duplicateTitle !== ''){
                 return obj.duplicateTitle === thisTask.duplicateTitle
             }
@@ -31,20 +33,8 @@ const makeTask = (() => {
         return { duplicateTitles, thisTask}
     }
 
-    const taskLibrary = (() => {
-        let tasks = [];
-        return { tasks }
-    })();
-
-    const deleteTaskfromLibrary = (deleteThis) => {
-        taskLibrary.tasks = taskLibrary.tasks.filter(obj => {
-            if (obj.duplicateTitle !== ''){
-                return obj.duplicateTitle !== deleteThis
-            }
-            else return obj.title !== deleteThis
-        });
-    }
-    return { newTask, taskLibrary, prohibitDuplicateTitles, deleteTaskfromLibrary }
+    
+    return { newTask, prohibitDuplicateTitles }
 })();
 
 export { makeTask }

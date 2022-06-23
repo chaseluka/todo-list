@@ -167,7 +167,7 @@ body {
     width: min-content;
 }
 
-.completed-tasks {
+#completed {
     margin-top: 4vh;
     border-bottom: 3px solid var(--white);
     width: fit-content;
