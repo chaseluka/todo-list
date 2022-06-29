@@ -2,8 +2,8 @@ import { displayTask } from './displaytask.js';
 import { Projects } from './projects.js';
 
 const makeTask = (() => {
-    const createTask = (title, notes, date, priority, duplicateTitle) => {
-        return {title, notes, date, priority, duplicateTitle}
+    const createTask = (title, notes, date, priority, duplicateTitle, completed) => {
+        return {title, notes, date, priority, duplicateTitle, completed}
     }
 
     const newTask = () => {
@@ -13,6 +13,7 @@ const makeTask = (() => {
             document.getElementById('date').value,
             document.getElementById('priority-list').value,
             '',
+            false, 
         );
         Projects.determineSelectedProject().push(task);
         console.log(Projects.projectsArray.projectsList);

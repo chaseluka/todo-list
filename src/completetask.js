@@ -1,11 +1,10 @@
 
 import { makeTask } from './maketask.js';
+import { Projects } from './projects.js';
 
 const completeTask = (e) => {
     const row = e.target.parentElement.parentElement;
     const taskList = document.querySelector('.task-list');
-    
-
 
     e.target.src = '../src/images/checked-circle.svg';
 
@@ -14,10 +13,10 @@ const completeTask = (e) => {
     }, "3500");
 
     setTimeout(() => {
-        makeTask.deleteTaskfromLibrary(row.getAttribute('data-task'));
+        Projects.projectsArray.completedTasks.push(Projects.findTaskInProject(row.getAttribute('data-task')));
+        Projects.deleteTaskfromLibrary(row.getAttribute('data-task'));
         taskList.removeChild(row);
-    }, "6000");
-    
+    }, "1000");
 }
 
 export { completeTask }

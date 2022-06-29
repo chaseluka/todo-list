@@ -163,14 +163,21 @@ body {
 
 .projects-title {
     margin-top: 4vh;
-    border-bottom: 3px solid var(--white);
+    border-bottom: 0.15vmax solid var(--white);
     width: min-content;
 }
 
-#completed {
-    margin-top: 4vh;
-    border-bottom: 3px solid var(--white);
+#completed div{
     width: fit-content;
+    padding: 0.3vmax;
+    border-radius: 5px;
+}
+
+#completed {
+    width: fit-content;
+    margin-top: 4vh;
+    border-bottom: 0.15vmax solid var(--white);
+    cursor: pointer;
 }
 
 .projects-list {
@@ -276,7 +283,11 @@ input:focus, select {
     display: flex;
     gap: 1vmax;
     align-items: center;
-    width: 90%;
+    width: fit-content;
+    max-width: 90%;
+    padding: 0.2vmax;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .project-right img {
@@ -302,6 +313,10 @@ input:focus, select {
 
 .project-title {
     min-width: fit-content;
+}
+
+.project-selected {
+    background-color: #555;
 }
 
 @keyframes fadeout {

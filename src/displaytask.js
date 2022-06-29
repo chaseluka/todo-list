@@ -12,6 +12,7 @@ const displayTask = (task) => {
             return row.setAttribute('data-task', `${task.title}`);
         }
     }
+
     if (task.title !== '' && task.projectTitle === undefined){
         const taskList = document.querySelector('.task-list');
 

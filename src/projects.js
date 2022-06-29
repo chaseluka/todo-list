@@ -4,7 +4,8 @@ import { displayProject } from './displayproject.js';
 const Projects = (() => {
     const projectsArray = (() => {
         let projectsList = [];
-        return { projectsList }
+        let completedTasks = [];
+        return { projectsList, completedTasks }
     })();
 
     const addProjectToArray = (project) => {    
@@ -68,13 +69,62 @@ const Projects = (() => {
         return selectedProject[0]
     };
 
+    const findProjectElement = (desiredElement) => {
+        const projectsList = document.querySelectorAll('.project');
+        let thisElement = [...projectsList].filter(element => {
+            return element.getAttribute('data-project') === desiredElement;
+        });
+        return thisElement
+    }
+
+    const showSelectedProject = () => {
+        const completeTasks = document.querySelector('#completed div');
+        if (completedTasksIsClicked.completedClicked === true){
+            completeTasks.classList.add('project-selected');
+            projectsArray.projectsList.forEach(project => {
+                if (project[0].duplicateProjectTitle !== ''){
+                    let element = findProjectElement(project[0].duplicateProjectTitle);
+                    element[0].classList.remove('project-selected');
+                }
+                else {
+                    let element = findProjectElement(project[0].projectTitle);
+                    element[0].classList.remove('project-selected');
+                }
+            })
+        }
+        else {
+            completeTasks.classList.remove('project-selected');
+            projectsArray.projectsList.forEach(project => {
+                if (project[0].projectSelected === 'true'){
+                    if (project[0].duplicateProjectTitle !== ''){
+                        let element = findProjectElement(project[0].duplicateProjectTitle);
+                        element[0].classList.add('project-selected');;
+                    }
+                    else {
+                        let element = findProjectElement(project[0].projectTitle);
+                        element[0].classList.add('project-selected');
+                    }
+                }
+                else {
+                    if (project[0].duplicateProjectTitle !== ''){
+                        let element = findProjectElement(project[0].duplicateProjectTitle);
+                        element[0].classList.remove('project-selected');
+                    }
+                    else {
+                        let element = findProjectElement(project[0].projectTitle);
+                        element[0].classList.remove('project-selected');
+                    }
+                }
+            })
+        }
+    }
+
     const replaceProjectinArray = (thisProject) => {
         projectsArray.projectsList.forEach(project => {
             if (project[0].projectSelected === 'true'){
                 let index = projectsArray.projectsList.indexOf(project);
                 projectsArray.projectsList.splice(index, 1, thisProject)
-            }
-            
+            }   
         });
     }
 
@@ -90,6 +140,18 @@ const Projects = (() => {
         replaceProjectinArray(thisProject);
     }
 
+    const findTaskInProject = (thisTask) => {
+        let thisProject = determineSelectedProject().filter(task => {
+            if (task.duplicateTitle !== ''){
+                return task.duplicateTitle === thisTask
+            }
+            else if (task.title !== ''){
+                return task.title === thisTask
+            }
+        });
+        return thisProject
+    }
+
     const prohibitDuplicateProjects = (thisProject) => {
         let duplicateProjects = projectsArray.projectsList.filter(obj => {
             if (obj[0].duplicateProjectTitle !== ''){
@@ -102,9 +164,15 @@ const Projects = (() => {
         }
         return { duplicateProjects, thisProject}
     }
+
+    const completedTasksIsClicked = (() => {
+        let completedClicked = false;
+        return { completedClicked }
+    })();
+
     return { projectsArray, addProjectToArray, loadProjectonDOM, determineSelectedProject, 
         setSelectedProject, prohibitDuplicateProjects, deleteProjectFromArray, clearAllProjectsFromDOM,
-        deleteTaskfromLibrary }
+        deleteTaskfromLibrary, findTaskInProject, showSelectedProject, completedTasksIsClicked }
 })();
 
 export { Projects }

@@ -10,6 +10,7 @@ const displayProject = (project) => {
             return newProject.setAttribute('data-project', `${project.projectTitle}`);
         }
     }
+    
 
     if (project.projectTitle !== ''){
         const projectsList = document.querySelector('.projects-list');
@@ -53,7 +54,12 @@ const displayProject = (project) => {
 
         projectLeft.addEventListener('click', () => {
             Projects.setSelectedProject(project);
-            console.log(Projects.determineSelectedProject());
+
+            const newTask = document.getElementById('new-task');
+            newTask.style.display = 'flex';
+
+            Projects.completedTasksIsClicked.completedClicked = false;
+            Projects.showSelectedProject();
         })
         
     }
