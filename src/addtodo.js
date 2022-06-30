@@ -1,6 +1,5 @@
 import { makeTask } from './maketask.js';
 
-
 const inputTaskDOMDisplay = (() => {
     const taskList = document.querySelector('.task-list');
     const newTaskBtn = document.getElementById('new-task');
@@ -24,7 +23,6 @@ const inputTaskDOMDisplay = (() => {
     divTwo.classList.add('input-container');
     divThree.classList.add('input-container');
 
-
     const title = document.createElement('input');
     title.type = 'text';
     title.id = 'title';
@@ -41,7 +39,7 @@ const inputTaskDOMDisplay = (() => {
     date.type = 'text';
     date.id = 'date';
     date.name = 'date';
-    date.placeholder = 'Date due';
+    date.placeholder = 'date';
 
     const priority = document.createElement('div');
     priority.classList.add('priority');

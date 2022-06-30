@@ -5,12 +5,8 @@ import { displayCompletedTasksOnDOM } from './displaycompletetasks.js';
 
 inputTaskDOMDisplay;
 newProject;
-
-Projects.addProjectToArray('My Tasks');
-Projects.projectsArray.projectsList[0][0].projectSelected = 'true';
-
-Projects.deleteProjectFromArray('My Tasks');
-
+Projects.retrieveData();
+console.log('hi');
 const completedTasks = document.getElementById('completed');
 completedTasks.addEventListener('click', () => {
     Projects.projectsArray.completedTasks.forEach(task => {
@@ -18,9 +14,9 @@ completedTasks.addEventListener('click', () => {
         displayCompletedTasksOnDOM(task);
     });
     Projects.completedTasksIsClicked.completedClicked = true;
-    console.log(Projects.completedTasksIsClicked.completedClicked);
     Projects.showSelectedProject();
 })
+
 
  
 

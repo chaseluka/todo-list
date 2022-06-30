@@ -14,6 +14,7 @@ const Projects = (() => {
         project.unshift(newProject);
         projectsArray.projectsList.push(project);
         displayProject(project[0]);
+        saveProjectData();
     }
 
     const loadProjectonDOM = (project) => {
@@ -41,6 +42,7 @@ const Projects = (() => {
             }
             else return project[0];
         });
+        saveProjectData();
     }
 
     const setSelectedProject = (thisProject) => {
@@ -126,6 +128,7 @@ const Projects = (() => {
                 projectsArray.projectsList.splice(index, 1, thisProject)
             }   
         });
+        saveProjectData();
     }
 
     const deleteTaskfromLibrary = (deleteThis) => {
@@ -170,9 +173,51 @@ const Projects = (() => {
         return { completedClicked }
     })();
 
-    return { projectsArray, addProjectToArray, loadProjectonDOM, determineSelectedProject, 
-        setSelectedProject, prohibitDuplicateProjects, deleteProjectFromArray, clearAllProjectsFromDOM,
-        deleteTaskfromLibrary, findTaskInProject, showSelectedProject, completedTasksIsClicked }
+    let projectsStorage = '';
+    let completedTasksStorage = '';
+
+    const saveProjectData = () => {
+        projectsStorage = JSON.stringify(projectsArray.projectsList);
+        localStorage.setItem('MyProjects', projectsStorage);
+    }
+
+    const saveCompletedTasksData = () => {
+        completedTasksStorage = JSON.stringify(projectsArray.completedTasks);
+        localStorage.setItem('MyCompletedTasks', completedTasksStorage);
+    }
+
+    const retrieveData = () => {
+        let myProjects = JSON.parse(localStorage.getItem('MyProjects'));
+
+        if (localStorage.getItem('MyProjects') === null && localStorage.getItem('MyCompletedTasks') === null){
+            projectsArray.completedTasks = [];
+            projectsArray.projectsList = [];
+
+            addProjectToArray('My Tasks');
+            setSelectedProject(projectsArray.projectsList[0][0]);
+            showSelectedProject();
+            deleteProjectFromArray('My Tasks');
+        }
+        else if (localStorage.getItem('MyCompletedTasks') !== null && myProjects.length === 0){
+            let retrieveCompletedTasksData = JSON.parse(localStorage.getItem('MyCompletedTasks'));
+            projectsArray.completedTasks = retrieveCompletedTasksData;
+            projectsArray.projectsList = [];
+        }
+        else {
+            let retrieveCompletedTasksData = JSON.parse(localStorage.getItem('MyCompletedTasks'));
+            projectsArray.completedTasks = retrieveCompletedTasksData;
+
+            let retrieveProjectData = JSON.parse(localStorage.getItem('MyProjects'));
+            projectsArray.projectsList = retrieveProjectData;
+            setSelectedProject(projectsArray.projectsList[0][0]);
+            projectsArray.projectsList.forEach(project => displayProject(project[0]));
+            showSelectedProject();
+        }
+    }
+
+    return { projectsArray, addProjectToArray, loadProjectonDOM, determineSelectedProject, setSelectedProject, 
+        prohibitDuplicateProjects, deleteProjectFromArray, clearAllProjectsFromDOM, deleteTaskfromLibrary, 
+        findTaskInProject, showSelectedProject, completedTasksIsClicked, saveProjectData, saveCompletedTasksData, retrieveData }
 })();
 
 export { Projects }

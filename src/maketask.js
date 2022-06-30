@@ -1,5 +1,6 @@
 import { displayTask } from './displaytask.js';
 import { Projects } from './projects.js';
+import { compareAsc, format } from 'date-fns'
 
 const makeTask = (() => {
     const createTask = (title, notes, date, priority, duplicateTitle, completed) => {
@@ -16,8 +17,8 @@ const makeTask = (() => {
             false, 
         );
         Projects.determineSelectedProject().push(task);
-        console.log(Projects.projectsArray.projectsList);
         displayTask(task);
+        Projects.saveProjectData();
         return {task}
     } 
 

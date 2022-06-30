@@ -16,7 +16,8 @@ const completeTask = (e) => {
         Projects.projectsArray.completedTasks.push(Projects.findTaskInProject(row.getAttribute('data-task')));
         Projects.deleteTaskfromLibrary(row.getAttribute('data-task'));
         taskList.removeChild(row);
-    }, "1000");
+        Projects.saveCompletedTasksData();
+    }, "6000");
 }
 
 export { completeTask }
