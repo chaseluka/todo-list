@@ -21,5 +21,8 @@ completedTasks.addEventListener("click", () => {
 const task = document.getElementById("new-task");
 const project = document.getElementById("new-project");
 
-task.prepend(Circle);
-project.prepend(Circle);
+const myCircle = new Image();
+myCircle.src = Circle;
+
+task.prepend(myCircle);
+project.prepend(myCircle);
