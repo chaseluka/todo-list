@@ -3,6 +3,7 @@ import { newProject } from "./newproject.js";
 import { Projects } from "./projects.js";
 import { displayCompletedTasksOnDOM } from "./displaycompletetasks.js";
 import "./style.css";
+import Circle from "./images/plus-circle.svg";
 
 inputTaskDOMDisplay;
 newProject;
@@ -16,3 +17,9 @@ completedTasks.addEventListener("click", () => {
   Projects.completedTasksIsClicked.completedClicked = true;
   Projects.showSelectedProject();
 });
+
+const task = document.getElementById("new-task");
+const project = document.getElementById("new-project");
+
+task.prepend(Circle);
+project.prepend(Circle);
